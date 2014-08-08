@@ -92,6 +92,9 @@ ${R}${GREY}[\t] ${BLUE}\w \
  
 export PROMPT_COMMAND=__prompt_command  # Func to gen PS1 after CMDs
 
+if [-f ~/.secret_profile]; then
+    source ~/.secret_profile
+fi
 
 
 
