@@ -1,7 +1,7 @@
 
 
 #dynamically connect to an edge.etilbudsavis.dk node and call the indexer tool
-function apitools {
+function cheesetool {
     local addr="$(curl -s edge.etilbudsavis.dk | awk '/    Internal ip   :/{print $4}')"
     ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "${addr}" "cd /var/app/current/tools; $@"
 }
