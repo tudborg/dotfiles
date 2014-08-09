@@ -26,10 +26,8 @@ alias flushNetwork='sudo ipfw flush'
 export LANG="en_GB.UTF-8"
 export LC_ALL="en_GB.UTF-8"
 
-
-export EDITOR="subl -w"
-
-export PATH=~/bin:/usr/local/bin:/usr/local/sbin:$PATH
+alias sublwait="subl -w"
+export EDITOR="sublwait"
 
 
 #export docker host addr
