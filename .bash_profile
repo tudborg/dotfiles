@@ -26,8 +26,13 @@ alias flushNetwork='sudo ipfw flush'
 export LANG="en_GB.UTF-8"
 export LC_ALL="en_GB.UTF-8"
 
-alias sublwait="subl -w"
-export EDITOR="sublwait"
+
+
+#editor is sublime with wait flag
+export EDITOR="wsubl"
+
+#Throw awesome stuff on path
+export PATH=~/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
 
 #export docker host addr
