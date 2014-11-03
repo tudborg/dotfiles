@@ -2,6 +2,7 @@
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
+
 call vundle#begin()
 
 " Plugin defs
@@ -30,6 +31,11 @@ let g:gitgutter_realtime = 1 "maybe disable if git hangs
 let g:gitgutter_eager=1
 let g:gitgutter_sign_column_always=1
 
+" ctrlP
+let g:ctrlp_show_hidden = 1
+
+
+
 " all the tabbing stuff
 set autoindent
 set smartindent
@@ -37,6 +43,8 @@ set shiftwidth=4
 set tabstop=4
 set expandtab
 
+
+" I have no idea what this does
 vnoremap <silent><S-TAB> <gv
 vnoremap <silent><TAB> >gv
 
@@ -57,7 +65,7 @@ set laststatus=2
 "set statusline+=%f\ " file name
 set wildmode=list:longest
 set wildmenu
-
+set smartcase
 
 let mapleader = ","
 
@@ -65,10 +73,12 @@ let mapleader = ","
 nmap <leader>w :w!<cr>
 nmap <leader>f :normal gg=G<cr>
 
+nmap <C-Tab> :tabn
 
 " Enable syntax highlighting
 syntax on
 " set colorscheme
 set t_Co=256
 colorscheme Tomorrow-Night-Eighties
+
 
