@@ -11,6 +11,7 @@ Plugin 'bling/vim-airline'
 Plugin 'chriskempson/vim-tomorrow-theme'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
+Plugin 'scrooloose/syntastic'
 
 call vundle#end()
 filetype plugin indent on
@@ -55,7 +56,7 @@ set laststatus=2
 "set statusline+=%2*%-3.3n%0*
 "set statusline+=%f\ " file name
 set wildmode=list:longest
-    set wildmenu
+set wildmenu
 
 
 let mapleader = ","
