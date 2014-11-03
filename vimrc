@@ -26,7 +26,8 @@ let g:airline_powerline_fonts=1
 
 " vim-gitgutter
 let g:gitgutter_realtime = 1 "maybe disable if git hangs
-
+let g:gitgutter_eager=1
+let g:gitgutter_sign_column_always=1
 
 " all the tabbing stuff
 set autoindent
