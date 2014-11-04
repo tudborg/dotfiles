@@ -16,7 +16,7 @@
 	ps = push
 	ci = commit --verbose
 [core]
-	excludesfile = /Users/tbug/.gitignore_global
+	excludesfile = /Users/tudborg/.gitignore_global
 	[difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
