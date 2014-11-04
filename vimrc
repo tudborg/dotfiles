@@ -3,6 +3,7 @@ set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 
+
 call vundle#begin()
 
 " Plugin defs
@@ -17,6 +18,10 @@ Plugin 'scrooloose/syntastic'
 call vundle#end()
 filetype plugin indent on
 " Vundle end
+
+
+let mapleader = ","
+
 
 "
 " Plugin Configs
@@ -33,8 +38,12 @@ let g:gitgutter_sign_column_always=1
 
 " ctrlP
 let g:ctrlp_show_hidden = 1
+" list all buffers in ctrlP when typing '
+map ' :CtrlPBuffer<CR>
 
 
+map <C-w><TAB> :bnext<CR>
+map <C-w><S-TAB> :bprev<CR>
 
 " all the tabbing stuff
 set autoindent
@@ -47,7 +56,6 @@ set expandtab
 " Indent/Unindent in block
 vnoremap <silent><S-TAB> <gv
 vnoremap <silent><TAB> >gv
-
 
 
 " Misc
@@ -73,8 +81,6 @@ syntax on
 " set colorscheme
 set t_Co=256
 colorscheme Tomorrow-Night-Eighties
-
-
 
 autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber
