@@ -44,7 +44,7 @@ set tabstop=4
 set expandtab
 
 
-" I have no idea what this does
+" Indent/Unindent in block
 vnoremap <silent><S-TAB> <gv
 vnoremap <silent><TAB> >gv
 
@@ -67,17 +67,15 @@ set wildmode=list:longest
 set wildmenu
 set smartcase
 
-let mapleader = ","
-
-
-nmap <leader>w :w!<cr>
-nmap <leader>f :normal gg=G<cr>
-
-nmap <C-Tab> :tabn
 
 " Enable syntax highlighting
 syntax on
 " set colorscheme
 set t_Co=256
 colorscheme Tomorrow-Night-Eighties
+
+
+
+autocmd InsertEnter * :set number
+autocmd InsertLeave * :set relativenumber
 

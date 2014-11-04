@@ -34,7 +34,7 @@ export LC_ALL="en_GB.UTF-8"
 
 
 #editor is sublime with wait flag
-export EDITOR="wsubl"
+export EDITOR="vim"
 
 #Throw awesome stuff on path
 export PATH=~/bin:/usr/local/bin:/usr/local/sbin:$PATH
