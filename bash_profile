@@ -1,8 +1,13 @@
 
 
+
+function edge_addr {
+    local addr="$(curl -s edge.etilbudsavis.dk | awk '/    Internal ip   :/{print $4}')"
+    echo $addr
+}
 #dynamically connect to an edge.etilbudsavis.dk node and call the indexer tool
 function apitools {
-    local addr="$(curl -s edge.etilbudsavis.dk | awk '/    Internal ip   :/{print $4}')"
+    local addr=$(edge_addr)
     etassh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "${addr}" "cd /var/app/current/tools; $@"
 }
 function cheesetool {
@@ -33,7 +38,6 @@ export EDITOR="wsubl"
 
 #Throw awesome stuff on path
 export PATH=~/bin:/usr/local/bin:/usr/local/sbin:$PATH
-
 
 #export docker host addr
 export DOCKER_HOST=tcp://localdocker:4243
