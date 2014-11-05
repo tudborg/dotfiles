@@ -73,6 +73,8 @@ set laststatus=2
 "set statusline+=%f\ " file name
 set wildmode=list:longest
 set wildmenu
+
+set ignorecase
 set smartcase
 
 
