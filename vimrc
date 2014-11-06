@@ -40,7 +40,7 @@ let g:gitgutter_sign_column_always=1
 let g:ctrlp_show_hidden = 1
 " list all buffers in ctrlP when typing '
 map ' :CtrlPBuffer<CR>
-
+let g:ctrlp_match_window = 'results:50,bottom,order:btt,min:3,max:50'
 
 map <C-w><TAB> :bnext<CR>
 map <C-w><S-TAB> :bprev<CR>
@@ -77,12 +77,16 @@ set wildmenu
 set ignorecase
 set smartcase
 
+set hlsearch
+:nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 
 " Enable syntax highlighting
 syntax on
 " set colorscheme
 set t_Co=256
 colorscheme Tomorrow-Night-Eighties
+
+:set cursorline
 
 autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber
