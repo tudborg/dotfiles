@@ -290,7 +290,7 @@ statusbar = {
 settings = {
   core = { real_name = "tbug"; user_name = "tbug"; nick = "tbug"; };
   "fe-text" = { actlist_sort = "refnum"; term_force_colors = "yes"; };
-  "fe-common/core" = { theme = "lenten"; bell_beeps = "yes"; };
+  "fe-common/core" = { theme = "lime"; bell_beeps = "yes"; };
 };
 hilights = ( { text = "tbug"; nick = "yes"; word = "yes"; } );
 logs = { };
