@@ -33,15 +33,36 @@ function __prompt_command () {
     export GIT_PS1_SHOWUPSTREAM="auto"
  
     if [ $EXIT != 0 ]; then
-        local STATUS="${R}${GREY}(${RED}${EXIT}${R}${GREY})${R} "      # Add red if exit code non 0
+        local status="${R}${GREY}(${RED}${EXIT}${R}${GREY})${R} "      # Add red if exit code non 0
     else
-        local STATUS=""
+        local status=""
     fi
- 
+
+    if [[ "$VIRTUAL_ENV" != "" ]]; then
+        local venv=" ${R}${GREY}(${GREEN}${VIRTUAL_ENV##*/}${R}${GREY})${R}"
+    else
+        local venv=""
+    fi
+     
+    case "$TERM" in
+    xterm*|rxvt*)
+        # color
+        ;;
+    *)
+        # no color
+        ;;
+    esac
+
+    local gitline=''
+    if type -t __git_ps1 > /dev/null; then
+        gitline="\$(__git_ps1 \"${GREY}(${DEFAULT}${D}%s${GREY})\")"
+    fi
+
     #make that damn PS1
     #split in lines to easy readability
-    export PS1="${debian_chroot:+($debian_chroot)}\
-${R}${GREY}[\t] ${BLUE}\w \
-\$(__git_ps1 \"${GREY}(${DEFAULT}%s${GREY})\")\n${STATUS}${BLUE}\$>${R} "
+    export PS1="${R}${GREY}[\t] ${BLUE}\w ${gitline}\n${status}${BLUE}\$${venv}${BLUE}>${R} "
     export PS2="${R}${BLUE}||${R} "
+
+
 }
+export PROMPT_COMMAND=__prompt_command  # Func to gen PS1 after CMDs
