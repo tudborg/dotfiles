@@ -8,7 +8,6 @@
 [alias]
 	st = status
 	br = branch
-	co = checkout
 	df = diff
 	lg = log -p
 	pl = pull
