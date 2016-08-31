@@ -8,7 +8,7 @@ function __prompt_command () {
     local BOLD="\[\033[1m\]" #bold
     local DIM="\[\033[2m\]" #dim
     local UNDERLINE="\[\033[4m\]" #underline
-    #took the colors _i_ think are nice and defined as vars
+
     local DEFAULT="\[\033[39m\]"
     local RED="\[\033[91m\]"
     local GREEN="\[\033[32m\]"
@@ -44,7 +44,7 @@ function __prompt_command () {
     if [ $LASTEXIT != 0 ]; then
         local status="${r}${d}(${e}${LASTEXIT}${r}${d})${r} "
     else
-        local status=""
+        local status="${r}${d}(${i}0${d})${r} "
     fi
 
     # virtualenv support
