@@ -2,7 +2,7 @@ if [ -x /usr/libexec/path_helper ]; then
     eval `/usr/libexec/path_helper -s`
 fi
 
-if ! which -s realpath; then
+if ! which realpath >/dev/null; then
     # hacky realpath shim
     realpath() {
         [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
