@@ -35,7 +35,7 @@ function __prompt_command () {
 
     local r="$RESET"  # reset sequence
     local p="$GREEN"  # primary color sequence
-    local d="$GREY"   # dim sequence
+    local d="$DIM"   # dim sequence
 
     local i="$DIM$WHITE"   # info sequence
     local e="$RED"    # error sequence
