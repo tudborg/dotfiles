@@ -1,4 +1,4 @@
 #secrets.all.sh
-if [[ -f ~/.bash_private ]]; then
-    source ~/.bash_private
+if [[ -f $HOME/.bash_private ]]; then
+    source $HOME/.bash_private
 fi
