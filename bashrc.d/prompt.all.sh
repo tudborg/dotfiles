@@ -33,23 +33,22 @@ function __prompt_command () {
     export GIT_PS1_SHOWUPSTREAM="auto"
 
 
-    local r="$RESET"  # reset sequence
-    local p="$GREEN"  # primary color sequence
-    local d="$DIM"   # dim sequence
-
-    local i="$DIM$WHITE"   # info sequence
-    local e="$RED"    # error sequence
+    local r="$RESET"       # reset sequence
+    local p="$BOLD$GREEN"  # primary color sequence
+    local s="$DIM$GREEN"   # secondary color sequence
+    local f="$GREY"        # framing color (usually grey)
+    local e="$RED"         # error sequence
 
     # exit status in dimmed parens and error color number
     if [ $LASTEXIT != 0 ]; then
-        local status="${r}${d}(${e}${LASTEXIT}${r}${d})${r} "
+        local status="$r$f($r$e${LASTEXIT}$r$f)$r "
     else
-        local status="${r}${d}(${i}0${d})${r} "
+        local status="$r$f(0)$r "
     fi
 
     # virtualenv support
     if [[ "$VIRTUAL_ENV" != "" ]]; then
-        local venv=" ${r}${d}(${p}${VIRTUAL_ENV##*/}${r}${d})${r}"
+        local venv=" $r$f($s${VIRTUAL_ENV##*/}$r$f)$r"
     else
         local venv=""
     fi
@@ -65,11 +64,11 @@ function __prompt_command () {
 
     local gitline=''
     if type -t __git_ps1 > /dev/null; then
-        gitline="\$(__git_ps1 \"${d}(${i}%s${r}${d})\")"
+        gitline="\$(__git_ps1 \" $r$f($s%s$r$f)\")"
     fi
 
-    export PS1="${r}${d}[\t] \u@\h ${p}\w ${gitline}\n${status}${p}\$${venv}${p}>${r} "
-    export PS2="${r}${p} |${r} "
+    export PS1="$r$f[\t] \u@\h $r$p\w$r${gitline}$r\n${status}$r$s\$${venv}$r$s>$r "
+    export PS2="$r$s |${r} "
 
 
 }
