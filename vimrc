@@ -3,18 +3,15 @@ set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 
-
 call vundle#begin()
-
 " Plugin defs
 Plugin 'gmarik/Vundle.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'bling/vim-airline'
-Plugin 'chriskempson/vim-tomorrow-theme'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 " Plugin 'scrooloose/syntastic'
-
 call vundle#end()
 filetype plugin indent on
 " Vundle end
@@ -25,16 +22,17 @@ let mapleader = ","
 
 "
 " Plugin Configs
-"
+        "
 
 " airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts=1
+let g:airline_theme='luna'
 
 " vim-gitgutter
 let g:gitgutter_realtime = 1 "maybe disable if git hangs
 let g:gitgutter_eager=1
-let g:gitgutter_sign_column_always=1
+set signcolumn=yes
 
 " ctrlP
 let g:ctrlp_show_hidden = 1
@@ -83,8 +81,9 @@ set hlsearch
 " Enable syntax highlighting
 syntax on
 " set colorscheme
-set t_Co=256
-colorscheme Tomorrow-Night-Eighties
+" set t_Co=256
+set background=dark
+colorscheme hybrid
 
 :set cursorline
 
