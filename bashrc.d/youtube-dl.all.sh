@@ -1,5 +1,5 @@
 
-if which youtube-dl >/dev/null; then
+if command -v youtube-dl >/dev/null; then
     function play {
         # Skip DASH manifest for speed purposes. This might actually disable
         # being able to specify things like 'bestaudio' as the requested format,

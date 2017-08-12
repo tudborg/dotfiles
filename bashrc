@@ -5,7 +5,14 @@ case $- in
 esac
 
 source_bash_plugins () {
-    local dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+    local _source="${BASH_SOURCE[0]}"
+    while [ -h "$_source" ]; do
+        local dir="$( cd -P "$( dirname "$_source" )" && pwd )"
+        _source="$(readlink "$_source")"
+        [[ $_source != /* ]] && _source="$dir/$_source"
+    done
+    dir="$( cd -P "$( dirname "$_source" )" && pwd )"
+
     local platform='unknown'
     local unamestr="$(uname)"
     local file
