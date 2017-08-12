@@ -34,8 +34,8 @@ function __prompt_command () {
 
 
     local r="$RESET"       # reset sequence
-    local p="$BOLD$GREEN"  # primary color sequence
-    local s="$DIM$GREEN"   # secondary color sequence
+    local p="$BOLD$CYAN"  # primary color sequence
+    local s="$DIM$CYAN"   # secondary color sequence
     local f="$GREY"        # framing color (usually grey)
     local e="$RED"         # error sequence
 
