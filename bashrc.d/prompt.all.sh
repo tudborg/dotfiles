@@ -72,4 +72,7 @@ function __prompt_command () {
 
 
 }
+if [[ -f /usr/share/git/git-prompt.sh ]]; then
+    source /usr/share/git/git-prompt.sh
+fi
 export PROMPT_COMMAND=__prompt_command  # Func to gen PS1 after CMDs
