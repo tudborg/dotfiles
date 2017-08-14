@@ -11,6 +11,7 @@ Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
+Plugin 'flazz/vim-colorschemes'
 " Plugin 'scrooloose/syntastic'
 call vundle#end()
 filetype plugin indent on
@@ -32,7 +33,7 @@ let g:airline_theme='luna'
 " vim-gitgutter
 let g:gitgutter_realtime = 1 "maybe disable if git hangs
 let g:gitgutter_eager=1
-set signcolumn=yes
+" set signcolumn=yes
 
 " ctrlP
 let g:ctrlp_show_hidden = 1
