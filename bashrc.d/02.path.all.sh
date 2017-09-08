@@ -8,9 +8,6 @@ fi
 if [[ -d $HOME/.local/bin/ ]]; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
-if [[ -d $HOME/.cargo/bin/ ]]; then
-    export PATH="$HOME/.cargo/bin:$PATH"
-fi
 
 # add python's user base bin to path
 if command -v python3 >/dev/null; then
