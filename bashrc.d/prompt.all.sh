@@ -1,9 +1,6 @@
-# PS1 comming up:
-#a wrapper function to keep colors from polluting global space
 function __prompt_command () {
     local LASTEXIT="$?"
-    PS1=""
- 
+
     local RESET="\[\033[0m\]" #reset
     local BOLD="\[\033[1m\]" #bold
     local DIM="\[\033[2m\]" #dim
@@ -53,15 +50,6 @@ function __prompt_command () {
         local venv=""
     fi
 
-    case "$TERM" in
-    xterm*|rxvt*)
-        # color
-        ;;
-    *)
-        # no color
-        ;;
-    esac
-
     local gitline=''
     if type -t __git_ps1 > /dev/null; then
         gitline="\$(__git_ps1 \" $r$f($s%s$r$f)\")"
@@ -69,9 +57,8 @@ function __prompt_command () {
 
     export PS1="$r$f[\t] \u@\h $r$p\w$r${gitline}$r\n${status}$r$s\$${venv}$r$s>$r "
     export PS2="$r$s |${r} "
-
-
 }
+
 if [[ -f /usr/share/git/git-prompt.sh ]]; then
     source /usr/share/git/git-prompt.sh
 fi
