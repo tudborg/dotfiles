@@ -24,12 +24,7 @@ source_bash_plugins () {
         platform="${unamestr,,}"
     fi
 
-    for file in $dir/bashrc.d/*.all.sh; do
-        if [ -f "$file" ]; then
-            source "$file"
-        fi
-    done
-    for file in $dir/bashrc.d/*.$platform.sh; do
+    for file in $(printf '%s\n' $dir/bashrc.d/*.{all,$platform}.sh|sort); do
         if [ -f "$file" ]; then
             source "$file"
         fi

@@ -1,16 +1,21 @@
-if [ -x /usr/libexec/path_helper ]; then
-    eval `/usr/libexec/path_helper -s`
-fi
-
-if [[ -d ~/bin/ ]]; then
+# various bin paths in $HOME
+if [[ -d $HOME/bin/ ]]; then
     export PATH="$HOME/bin:$PATH"
 fi
-if [[ -d ~/.bin/ ]]; then
+if [[ -d $HOME/.bin/ ]]; then
     export PATH="$HOME/.bin:$PATH"
 fi
-if [[ -d ~/.local/bin/ ]]; then
+if [[ -d $HOME/.local/bin/ ]]; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
-if [[ -d ~/.cargo/bin/ ]]; then
+if [[ -d $HOME/.cargo/bin/ ]]; then
     export PATH="$HOME/.cargo/bin:$PATH"
+fi
+
+# add python's user base bin to path
+if command -v python3 >/dev/null; then
+    PATH="$PATH:$(python3 -c 'import site;print(site.USER_BASE)')/bin"
+fi
+if command -v python2 >/dev/null; then
+    PATH="$PATH:$(python2 -c 'import site;print(site.USER_BASE)')/bin"
 fi
