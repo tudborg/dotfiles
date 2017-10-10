@@ -12,7 +12,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 Plugin 'flazz/vim-colorschemes'
-" Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 call vundle#end()
 filetype plugin indent on
 " Vundle end
@@ -81,10 +81,10 @@ set hlsearch
 
 " Enable syntax highlighting
 syntax on
-" set colorscheme
-" set t_Co=256
+
 set background=dark
-colorscheme hybrid
+colorscheme Monokai
+
 
 :set cursorline
 
