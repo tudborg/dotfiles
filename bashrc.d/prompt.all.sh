@@ -1,5 +1,25 @@
+function __fix_stdout_nonblock_bug () {
+    # some tool somewhere keeps messing up my stdout.
+    # It's most likely a nodejs tool, at least I've seen nodejs do this multiple times,
+    # however something somewhere in my pipeline does it incosistently but often
+    # enough that it is so annoying that I want to make sure it doesn't happen.
+    # Hence this hack.
+    # This python snippet "fixes" the issue, unsetting NONBLOCK mode if it is already set.
+    # Might be worth compiling a tiny C program to do it but this seems Good Enough for now.
+    if command -v python >/dev/null; then
+        python -c 'import os,sys,fcntl; flags = fcntl.fcntl(sys.stdout, fcntl.F_GETFL); fcntl.fcntl(sys.stdout, fcntl.F_SETFL, flags&~os.O_NONBLOCK);'
+    else
+        return 1
+    fi
+}
+
 function __prompt_command () {
     local LASTEXIT="$?"
+
+    # Fix a super annoying bug I keep seeing but can't figure out how to correct.
+    # some nodejs tool somewhere leaves stdout in nonblock mode which messes up
+    # other tools. So fix it ON EACH PROMPT!
+    __fix_stdout_nonblock_bug
 
     local RESET="\[\033[0m\]" #reset
     local BOLD="\[\033[1m\]" #bold
@@ -45,18 +65,23 @@ function __prompt_command () {
 
     # virtualenv support
     if [[ "$VIRTUAL_ENV" != "" ]]; then
-        local venv="$r$f($s${VIRTUAL_ENV##*/}$r$f)$r"
+        local venv="$r$f(venv:$s${VIRTUAL_ENV##*/}$r$f)$r"
     else
         local venv=""
+    fi
+
+    if [[ "$AWS_PROFILE" != "" ]]; then
+        local awsenv="$r$f(aws:$s${AWS_PROFILE}$r$f)$r"
+    else
+        local awsenv=""
     fi
 
     local gitline=''
     if type -t __git_ps1 > /dev/null; then
         gitline="\$(__git_ps1 \" $r$f[$s%s$r$f]\")"
     fi
-
-    export PS1="${r}${f}╭─(\t) \u@\h $r$p\w$r${gitline}${r}\n${f}╰─${status}$r${s}\$${venv}$r$s>$r "
-    export PS2="${r}  ${status}${s}\$${venv}>${r} "
+    export PS1="${r}${f}╭─(\t) \u@\h $r$p\w$r${gitline}${r}\n${f}╰─${status}$r${s}\$${venv}${awsenv}$r$s>$r "
+    export PS2="${r}  ${status}${s}\$${venv}${awsenv}>${r} "
 }
 
 if [[ -f /usr/share/git/git-prompt.sh ]]; then

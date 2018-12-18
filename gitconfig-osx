@@ -10,6 +10,13 @@
 	br = branch
 	df = diff
 	lg = log -p
-	pl = pull
+	pl = pull --all -p
 	ps = push
 	ci = commit --verbose
+	co = checkout
+[rerere]
+	enabled = true
+[merge]
+  ff = false
+[pull]
+  ff = only
