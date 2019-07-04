@@ -4,15 +4,17 @@ case $- in
     *) return;;
 esac
 
-source_bash_plugins () {
+dotfiles_directory () {
     local _source="${BASH_SOURCE[0]}"
     while [ -h "$_source" ]; do
         local dir="$( cd -P "$( dirname "$_source" )" && pwd )"
         _source="$(readlink "$_source")"
         [[ $_source != /* ]] && _source="$dir/$_source"
     done
-    dir="$( cd -P "$( dirname "$_source" )" && pwd )"
+    echo "$( cd -P "$( dirname "$_source" )" && pwd )"
+}
 
+dotfiles_platform () {
     local platform='unknown'
     local unamestr="$(uname)"
     local file
@@ -23,12 +25,23 @@ source_bash_plugins () {
     else
         platform="${unamestr,,}"
     fi
+    echo "$platform"
+}
 
-    for file in $(printf '%s\n' $dir/bashrc.d/*.{all,$platform}.sh|sort); do
+dotfiles_match () {
+    for file in $(dotfiles_directory)/bashrc.d/*.{all,$(dotfiles_platform)}.sh; do
+        if [[ -f "$file" && "$file" == *$1* ]]; then
+            echo "$file"
+        fi
+    done | sort
+}
+
+dotfiles_source () {
+    for file in $(dotfiles_match "$1"); do
         if [ -f "$file" ]; then
             source "$file"
         fi
     done
 }
 
-source_bash_plugins
+dotfiles_source
