@@ -1,0 +1,1 @@
+alias week="date +%GW%U"
