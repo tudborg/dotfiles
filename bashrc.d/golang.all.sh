@@ -1,2 +1,4 @@
 export GOPATH="$HOME/src/go"
-export PATH=$PATH:$GOPATH/bin
+if [[ -d "$GOPATH" ]]; then
+  path_append "$GOPATH/bin"
+fi

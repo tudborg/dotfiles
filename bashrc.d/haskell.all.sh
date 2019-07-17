@@ -1,3 +1,3 @@
 if [[ -d "$HOME/.cabal/bin" ]]; then
-    export PATH="$HOME/.cabal/bin:$PATH"
+    path_append "$HOME/.cabal/bin"
 fi

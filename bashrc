@@ -40,6 +40,10 @@ dotfiles_source () {
     for file in $(dotfiles_match "$1"); do
         if [ -f "$file" ]; then
             source "$file"
+            local status="$?"
+            if [[ "$status" -gt 0 ]]; then
+                echo "exit status after sourcing $file was $status" >&2
+            fi
         fi
     done
 }
