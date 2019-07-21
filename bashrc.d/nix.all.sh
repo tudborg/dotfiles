@@ -6,11 +6,11 @@ fi
 export XDG_DATA_DIRS="$HOME/.nix-profile/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
 
 # bash completions from nix:
-if [[ -d $HOME/.nix-profile/share/bash-completion ]]; then
+if [[ -f $HOME/.nix-profile/share/bash-completion/bash_completion ]]; then
     source $HOME/.nix-profile/share/bash-completion/bash_completion
 fi
 
 # git bash completions from git package
-if [[ -d $HOME/.nix-profile/share/git/contrib/completion ]]; then
+if [[ -f $HOME/.nix-profile/share/git/contrib/completion/git-completion.bash ]]; then
     source $HOME/.nix-profile/share/git/contrib/completion/git-completion.bash
 fi
