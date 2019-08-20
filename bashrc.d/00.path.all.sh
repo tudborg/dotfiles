@@ -1,5 +1,4 @@
 # various bin paths in $HOME
-
 path_prepend () {
     if ! [[ "$PATH" = *"$1"* ]]; then
         export PATH="$1:$PATH"
@@ -12,16 +11,6 @@ path_append () {
     fi
     return 0
 }
-
-if [[ -d $HOME/bin/ ]]; then
-    path_prepend "$HOME/bin"
-fi
-if [[ -d $HOME/.bin/ ]]; then
-    path_prepend "$HOME/.bin"
-fi
-if [[ -d $HOME/.local/bin/ ]]; then
-    path_prepend "$HOME/.local/bin"
-fi
 
 # add python's user base bin to path
 if command -v python3 >/dev/null; then
