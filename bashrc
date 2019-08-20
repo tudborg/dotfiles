@@ -4,6 +4,8 @@ case $- in
     *) return;;
 esac
 
+DOTFILES_DEBUG_FILE=/tmp/dotfiles_debug
+
 dotfiles_directory () {
     local _source="${BASH_SOURCE[0]}"
     while [ -h "$_source" ]; do
@@ -39,8 +41,14 @@ dotfiles_match () {
 dotfiles_source () {
     for file in $(dotfiles_match "$1"); do
         if [ -f "$file" ]; then
-            source "$file"
-            local status="$?"
+            if [ -f "$DOTFILES_DEBUG_FILE" ]; then
+                time source "$file"
+                local status="$?"
+                echo -e "^^^^^^^^^^^^^^^^: ${file}\n" >&2
+            else
+                source "$file"
+                local status="$?"
+            fi
             if [[ "$status" -gt 0 ]]; then
                 echo "exit status after sourcing $file was $status" >&2
             fi
