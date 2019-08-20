@@ -4,6 +4,7 @@ if command -v ruby >/dev/null && command -v gem >/dev/null; then
     else
         # move GEM_HOME into home dir. Global install is messy.
         export GEM_HOME="$(ruby -r rubygems -e 'puts Gem.user_dir')"
+        echo "$GEM_HOME" > /tmp/ruby_gem_home
     fi
     # prepend, because osx has some native ruby stuff that we cant really touch
     path_prepend "$GEM_HOME/bin"
