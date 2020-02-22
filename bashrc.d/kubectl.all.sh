@@ -17,4 +17,8 @@ if command -v kubectl >/dev/null; then
     if command -v __start_kubectl >/dev/null; then
         complete -o default -F __start_kubectl k
     fi
+    if command -v kubectx >/dev/null; then
+        alias kx="kubectx"
+        complete -o default -F _kube_contexts kx
+    fi
 fi
