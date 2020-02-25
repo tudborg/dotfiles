@@ -1,5 +1,15 @@
 if [[ -d $HOME/.nix-profile ]]; then
     source $HOME/.nix-profile/etc/profile.d/nix.sh
+
+    export NIX_SEARCH_CACHE="$HOME/.cache/nix-search-cache"
+    nix-search () {
+      if ! [[ -e "$NIX_SEARCH_CACHE" ]] || [[ "$(stat -f %c "$NIX_SEARCH_CACHE")" -lt "$(( $(date +%s) - 86400 ))" ]]; then
+        echo "updating nix-search cache" >&2
+        nix-env -qaP '*' > "$NIX_SEARCH_CACHE"
+      fi
+      grep -i "$*" "$NIX_SEARCH_CACHE"
+    }
+
 fi
 
 # will make bash-completion happy when installed via nix
