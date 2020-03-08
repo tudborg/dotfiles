@@ -19,6 +19,11 @@ if command -v kubectl >/dev/null; then
     fi
     if command -v kubectx >/dev/null; then
         alias kx="kubectx"
-        complete -o default -F _kube_contexts kx
+        _kx_contexts () {
+            local curr_arg;
+            curr_arg=${COMP_WORDS[COMP_CWORD]};
+            COMPREPLY=($(compgen -W "- $(kubectl config get-contexts --output='name')" -- $curr_arg ))
+        }
+        complete -o default -F _kx_contexts kx
     fi
 fi
