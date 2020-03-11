@@ -1,0 +1,19 @@
+\set QUIET 1
+\pset null '¤'
+\pset linestyle unicode
+\pset border 2
+
+
+\set PROMPT1 '%[%033[1m%][%n@%/] %R%# '
+-- SELECT * FROM<enter>. %R shows what type of input it expects.
+\set PROMPT2 '... %R %# '
+
+\timing
+
+\x auto
+\set ON_ERROR_ROLLBACK interactive
+\set VERBOSITY verbose
+\set HISTFILE ~/.psql_history- :DBNAME
+\set HISTCONTROL ignoredups
+\set COMP_KEYWORD_CASE upper
+\unset QUIET
