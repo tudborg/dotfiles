@@ -26,4 +26,8 @@ if command -v kubectl >/dev/null; then
         }
         complete -o default -F _kx_contexts kx
     fi
+    # if krew plugin exists, add it to bin path
+    if [[ -d "${HOME}/.krew" ]]; then
+        path_append "${HOME}/.krew/bin"
+    fi
 fi
