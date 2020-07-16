@@ -14,6 +14,7 @@ if command -v kubectl >/dev/null; then
     if ! command -v __start_kubectl >/dev/null; then
         source $HOME/.kube/completion.bash.inc
     fi
+    # make kubectl completions work for our short-name function `k` as well
     if command -v __start_kubectl >/dev/null; then
         complete -o default -F __start_kubectl k
     fi
@@ -26,8 +27,20 @@ if command -v kubectl >/dev/null; then
         }
         complete -o default -F _kx_contexts kx
     fi
+
     # if krew plugin exists, add it to bin path
     if [[ -d "${HOME}/.krew" ]]; then
         path_append "${HOME}/.krew/bin"
     fi
+
+    # if helm exists
+    if command -v helm >/dev/null; then
+        if [[ -d $HOME/.kube ]] && [[ ! -f $HOME/.kube/helm-completion.bash.inc ]]; then
+            helm completion bash > $HOME/.kube/helm-completion.bash.inc
+        fi
+        if ! command -v __start_helm >/dev/null; then
+            source $HOME/.kube/helm-completion.bash.inc
+        fi
+    fi
+
 fi
