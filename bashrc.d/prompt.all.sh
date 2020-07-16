@@ -83,9 +83,9 @@ function __prompt_command () {
 
     local k8sline=''
     if type -t kubectl > /dev/null; then
-        k8sline=" $r$f[k8s=$s\$(kubectl config current-context)$f]"
+        k8sline=" $r$f[$s\$(kubectl config current-context)$f]"
     fi
-    export PS1="${r}${f}╭─(\t) \u@\h $r$p\w$r${gitline}${k8sline}$r \n${f}╰─${status}$r${s}\$${venv}${awsenv}$r$s>$r "
+    export PS1="${r}${f}╭─(\t) \u@\h $r$p\w$r${gitline}${k8sline}$r\n${f}╰─${status}$r${s}\$${venv}${awsenv}$r$s>$r "
     export PS2="${r}  ${status}${s}\$${venv}${awsenv}>${r} "
 }
 
