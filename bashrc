@@ -5,6 +5,9 @@ case $- in
 esac
 
 DOTFILES_DEBUG_FILE=/tmp/dotfiles_debug
+if [ -f "$DOTFILES_DEBUG_FILE" ]; then
+    DOTFILES_DEBUG=true
+fi
 
 dotfiles_directory () {
     local _source="${BASH_SOURCE[0]}"
@@ -41,7 +44,7 @@ dotfiles_match () {
 dotfiles_source () {
     for file in $(dotfiles_match "$1"); do
         if [ -f "$file" ]; then
-            if [ -f "$DOTFILES_DEBUG_FILE" ]; then
+            if [ "$DOTFILES_DEBUG" = true ]; then
                 time source "$file"
                 local status="$?"
                 echo -e "^^^^^^^^^^^^^^^^: ${file}\n" >&2
@@ -55,5 +58,9 @@ dotfiles_source () {
         fi
     done
 }
+
+if [ "$DOTFILES_DEBUG" = true ]; then
+    echo "sourcing dotfiles:" >&2
+fi
 
 dotfiles_source
