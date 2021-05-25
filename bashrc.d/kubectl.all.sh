@@ -1,12 +1,6 @@
 if command -v kubectl >/dev/null; then
-    function k {
-        local BLUE='\033[0;34m'
-        local BOLD="\033[1m"
-        local CLEAR='\033[0m'
-        local context="$(awk '/^current-context:/{print $2}' $HOME/.kube/config)"
-        printf "${BLUE}${BOLD}$context${CLEAR}\n" >&2
-        kubectl "$@"
-    }
+    alias k="kubectl"
+
     if [[ -d $HOME/.kube ]] && [[ ! -f $HOME/.kube/completion.bash.inc ]]; then
         kubectl completion bash > $HOME/.kube/completion.bash.inc
     fi
@@ -26,6 +20,16 @@ if command -v kubectl >/dev/null; then
             COMPREPLY=($(compgen -W "- $(kubectl config get-contexts --output='name')" -- $curr_arg ))
         }
         complete -o default -F _kx_contexts kx
+    fi
+
+    if command -v kubens >/dev/null; then
+        alias kn="kubens"
+        _kn_namespaces () {
+            local curr_arg;
+            curr_arg=${COMP_WORDS[COMP_CWORD]};
+            COMPREPLY=($(compgen -W "- $(kubectl get namespaces -o jsonpath='{range .items[*]}{.metadata.name} {end}')" -- $curr_arg ))
+        }
+        complete -o default -F _kn_namespaces kn
     fi
 
     # if krew plugin exists, add it to bin path

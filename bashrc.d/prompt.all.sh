@@ -19,7 +19,9 @@ function __prompt_command () {
     # Fix a super annoying bug I keep seeing but can't figure out how to correct.
     # some nodejs tool somewhere leaves stdout in nonblock mode which messes up
     # other tools. So fix it ON EACH PROMPT!
-    __fix_stdout_nonblock_bug
+    # __fix_stdout_nonblock_bug
+    # Turns out this was too expensive for my liking, so I'm commenting it out.
+    # I can always call __fix_stdout_nonblock_bug if I need it.
 
     local RESET="\[\033[0m\]" #reset
     local BOLD="\[\033[1m\]" #bold
@@ -83,7 +85,7 @@ function __prompt_command () {
 
     local k8sline=''
     if type -t kubectl > /dev/null; then
-        k8sline=" $r$f[$s\$(kubectl config current-context)$f]"
+        k8sline=" $r$f[${s}⎈ \$(kubectl config view --minify -o jsonpath='{.current-context}:{..namespace}')${f}]"
     fi
     export PS1="${r}${f}╭─(\t) \u@\h $r$p\w$r${gitline}${k8sline}$r\n${f}╰─${status}$r${s}\$${venv}${awsenv}$r$s>$r "
     export PS2="${r}  ${status}${s}\$${venv}${awsenv}>${r} "

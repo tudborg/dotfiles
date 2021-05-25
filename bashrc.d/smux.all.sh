@@ -11,10 +11,9 @@ if command -v ssh >/dev/null; then
   }
   _smux() 
   {
-      local cur prev opts
+      local cur opts
       COMPREPLY=()
       cur="${COMP_WORDS[COMP_CWORD]}"
-      prev="${COMP_WORDS[COMP_CWORD-1]}"
       opts=$(
         awk '/^host/ && $2 !~ /\*/ {print $2}' ~/.ssh/config &&
         awk '!/\[/{split($1, a, ",");for(i in a){print a[i]}}' ~/.ssh/known_hosts | sort -u
