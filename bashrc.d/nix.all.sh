@@ -1,4 +1,4 @@
-if [[ -d $HOME/.nix-profile ]]; then
+if [[ -d $HOME/.nix-profile ]] && [[ -f $HOME/.nix-profile/etc/profile.d/nix.sh ]]; then
     source $HOME/.nix-profile/etc/profile.d/nix.sh
 
     export NIX_SEARCH_CACHE="$HOME/.cache/nix-search-cache"
@@ -44,17 +44,5 @@ if [[ -d $HOME/.nix-profile ]]; then
       grep -i "$params" "$NIX_SEARCH_CACHE"
     }
 
-fi
-
-# will make bash-completion happy when installed via nix
-export XDG_DATA_DIRS="$HOME/.nix-profile/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
-
-# bash completions from nix:
-if [[ -f $HOME/.nix-profile/share/bash-completion/bash_completion ]]; then
-    source $HOME/.nix-profile/share/bash-completion/bash_completion
-fi
-
-# git bash completions from git package
-if [[ -f $HOME/.nix-profile/share/git/contrib/completion/git-completion.bash ]]; then
-    source $HOME/.nix-profile/share/git/contrib/completion/git-completion.bash
+    export XDG_DATA_DIRS="${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
 fi

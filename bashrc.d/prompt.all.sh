@@ -91,12 +91,4 @@ function __prompt_command () {
     export PS2="${r}  ${status}${s}\$${venv}${awsenv}>${r} "
 }
 
-if ! type -t __git_ps1 > /dev/null; then
-    if [[ -f /usr/share/git/git-prompt.sh ]]; then
-        . /usr/share/git/git-prompt.sh
-    elif [[ -f $HOME/.nix-profile/share/git/contrib/completion/git-prompt.sh ]]; then
-        . $HOME/.nix-profile/share/git/contrib/completion/git-prompt.sh
-    fi
-fi
-
 export PROMPT_COMMAND=__prompt_command  # Func to gen PS1 after CMDs
