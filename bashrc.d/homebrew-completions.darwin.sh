@@ -1,6 +1,6 @@
 #homebrew completions
 # The BREW_PREFIX variable comes from the 00.hombrew.darwin.sh file
-if [[ ! -z "$BREW_PREFIX" ]] then
+if [[ ! -z "$BREW_PREFIX" ]]; then
     # brew exists, check for bash completions
     if [[ -f "${BREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
         # bash-completion@2
