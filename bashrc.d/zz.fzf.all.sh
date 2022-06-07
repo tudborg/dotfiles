@@ -2,11 +2,15 @@ if command -v fzf > /dev/null; then
   FZF_PREFIX=/usr/local/opt/fzf
   # Auto-completion
   # ---------------
-  source "${FZF_PREFIX}/shell/completion.bash"
+  if [[ -f "${FZF_PREFIX}/shell/completion.bash" ]]; then
+    source "${FZF_PREFIX}/shell/completion.bash"
+  fi
 
   # Key bindings
   # ------------
-  source "${FZF_PREFIX}/shell/key-bindings.bash"
+  if [[ -f "${FZF_PREFIX}/shell/key-bindings.bash" ]]; then
+    source "${FZF_PREFIX}/shell/key-bindings.bash"
+  fi
 
   # If we have bat installed, use bat as default preview fzf
   if command -v bat >/dev/null; then
