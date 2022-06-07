@@ -1,6 +1,13 @@
 if command -v kubectl >/dev/null; then
     alias k="kubectl"
 
+    # if krew plugin exists, add it to bin path
+    if [[ -d "${HOME}/.krew" ]]; then
+        path_append "${HOME}/.krew/bin"
+    fi
+
+    # cache kubectl completions so we don't have to invoke kubectl
+    # each time we want to source the completions.
     if [[ -d $HOME/.kube ]] && [[ ! -f $HOME/.kube/completion.bash.inc ]]; then
         kubectl completion bash > $HOME/.kube/completion.bash.inc
     fi
@@ -12,8 +19,14 @@ if command -v kubectl >/dev/null; then
     if command -v __start_kubectl >/dev/null; then
         complete -o default -F __start_kubectl k
     fi
+
+    # kubectx - helper for switching kubectl context
     if command -v kubectx >/dev/null; then
         alias kx="kubectx"
+    elif command -v kubectl-ctx >/dev/null; then
+        alias kx="kubectl-ctx"
+    fi
+    if alias kx 2>/dev/null >&2; then
         _kx_contexts () {
             local curr_arg;
             curr_arg=${COMP_WORDS[COMP_CWORD]};
@@ -22,8 +35,13 @@ if command -v kubectl >/dev/null; then
         complete -o default -F _kx_contexts kx
     fi
 
+    # kubens - helper for switching kubectl namespace
     if command -v kubens >/dev/null; then
         alias kn="kubens"
+    elif command -v kubectl-ns >/dev/null; then
+        alias kn="kubectl-ns"
+    fi
+    if alias kn 2>/dev/null >&2; then
         _kn_namespaces () {
             local curr_arg;
             curr_arg=${COMP_WORDS[COMP_CWORD]};
@@ -32,12 +50,7 @@ if command -v kubectl >/dev/null; then
         complete -o default -F _kn_namespaces kn
     fi
 
-    # if krew plugin exists, add it to bin path
-    if [[ -d "${HOME}/.krew" ]]; then
-        path_append "${HOME}/.krew/bin"
-    fi
-
-    # if helm exists
+    # if helm exists, cache helm bash completions, then source them
     if command -v helm >/dev/null; then
         if [[ -d $HOME/.kube ]] && [[ ! -f $HOME/.kube/helm-completion.bash.inc ]]; then
             helm completion bash > $HOME/.kube/helm-completion.bash.inc
