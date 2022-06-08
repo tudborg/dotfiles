@@ -80,12 +80,13 @@ function __prompt_command () {
 
     local gitline=''
     if type -t __git_ps1 > /dev/null; then
-        gitline="\$(__git_ps1 \" $r$f[$s%s$r$f]\")"
+        gitline="\$(__git_ps1 \" $r$f[$s%s$r$f]\")"
     fi
 
     local k8sline=''
     if type -t kubectl > /dev/null; then
-        k8sline=" $r$f[${s}⎈ \$(kubectl config view --minify -o jsonpath='{.current-context}:{..namespace}')${f}]"
+        local k8s="$(kubectl config view --minify -o jsonpath='{.current-context} {..namespace}')"
+        k8sline=" $r$f⎈[$s$k8s$r$f]"
     fi
     export PS1="${r}${f}╭─(\t) \u@\h $r$p\w$r${gitline}${k8sline}$r\n${f}╰─${status}$r${s}\$${venv}${awsenv}$r$s>$r "
     export PS2="${r}  ${status}${s}\$${venv}${awsenv}>${r} "
