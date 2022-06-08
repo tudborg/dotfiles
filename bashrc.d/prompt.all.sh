@@ -50,6 +50,16 @@ function __prompt_command () {
     # <> you have diverged from upstream
     # = matches upstream
     export GIT_PS1_SHOWUPSTREAM="auto"
+    # You can further control
+    # behaviour by setting GIT_PS1_SHOWUPSTREAM to a space-separated list
+    # of values:
+    #
+    #     verbose       show number of commits ahead/behind (+/-) upstream
+    #     name          if verbose, then also show the upstream abbrev name
+    #     legacy        don't use the '--count' option available in recent
+    #                   versions of git-rev-list
+    #     git           always compare HEAD to @{upstream}
+    #     svn           always compare HEAD to your SVN upstream
 
 
     local r="$RESET"       # reset sequence
@@ -80,15 +90,16 @@ function __prompt_command () {
 
     local gitline=''
     if type -t __git_ps1 > /dev/null; then
-        gitline="\$(__git_ps1 \" $r$f[$s%s$r$f]\")"
+        gitline="\$(__git_ps1 \" ${r}${f}[$s%s${r}${f}]\")"
     fi
 
     local k8sline=''
     if type -t kubectl > /dev/null; then
         local k8s="$(kubectl config view --minify -o jsonpath='{.current-context} {..namespace}')"
-        k8sline=" $r$f⎈[$s$k8s$r$f]"
+        k8sline=" ${r}${f}⎈ [${s}${k8s}${r}${f}]"
     fi
-    export PS1="${r}${f}╭─(\t) \u@\h $r$p\w$r${gitline}${k8sline}$r\n${f}╰─${status}$r${s}\$${venv}${awsenv}$r$s>$r "
+
+    export PS1="${r}${f}╭─(\t) \u@\h ${r}${p}\w${r}${gitline}${k8sline}${r}\n${f}╰─${status}${r}${s}\$${venv}${awsenv}${r}${s}>${r} "
     export PS2="${r}  ${status}${s}\$${venv}${awsenv}>${r} "
 }
 
