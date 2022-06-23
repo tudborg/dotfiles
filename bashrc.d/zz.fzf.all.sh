@@ -1,20 +1,18 @@
 if command -v fzf > /dev/null; then
-  FZF_PREFIX=/usr/local/opt/fzf
-  # Auto-completion
-  # ---------------
-  if [[ -f "${FZF_PREFIX}/shell/completion.bash" ]]; then
-    source "${FZF_PREFIX}/shell/completion.bash"
-  fi
+  export DOTFILES_FZF_DIRECTORY="$DOTFILES_DIRECTORY/fzf"
 
-  # Key bindings
-  # ------------
-  if [[ -f "${FZF_PREFIX}/shell/key-bindings.bash" ]]; then
-    source "${FZF_PREFIX}/shell/key-bindings.bash"
+  # if the configuration directory exists:
+  if [[ -d $DOTFILES_FZF_DIRECTORY ]]; then
+    if [[ -f "${DOTFILES_FZF_DIRECTORY}/completion.bash" ]]; then
+      source "${DOTFILES_FZF_DIRECTORY}/completion.bash"
+    fi
+    if [[ -f "${DOTFILES_FZF_DIRECTORY}/key-bindings.bash" ]]; then
+      source "${DOTFILES_FZF_DIRECTORY}/key-bindings.bash"
+    fi
   fi
 
   # If we have bat installed, use bat as default preview fzf
   if command -v bat >/dev/null; then
     export FZF_DEFAULT_OPTS="--preview='bat --style=changes,numbers -r 0:\$FZF_PREVIEW_LINES -f {+}'"
   fi
-
 fi

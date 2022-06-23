@@ -60,4 +60,10 @@ if command -v kubectl >/dev/null; then
         fi
     fi
 
+    # if tanka exists, register completion for it
+    local TK_BIN=$(command -v tk)
+    if [[ $? -eq 0 ]]; then
+        complete -C "$TK_BIN" tk
+    fi
+
 fi
