@@ -62,9 +62,16 @@ let ayucolor="mirage" " for mirage version of theme
 " let ayucolor="dark"   " for dark version of theme
 colorscheme ayu
 
-"   hello world
+" Highlight colors in their color
 let g:Hexokinase_highlighters = ['backgroundfull']
 let g:Hexokinase_optInPatterns = 'full_hex,rgb,rgba,hsl,hsla'
+
+" folding
+let g:markdown_folding=1
+highlight Folded term=standout ctermfg=14 ctermbg=0
+nnoremap <space> za
+vnoremap <space> za
+set foldlevel=99
 
 
 let g:lightline = {

@@ -1,3 +1,5 @@
+if [[ -z "$DOTFILES_DISABLE_PROMPT_COMMAND" ]]; then
+
 function __fix_stdout_nonblock_bug () {
     # some tool somewhere keeps messing up my stdout.
     # It's most likely a nodejs tool, at least I've seen nodejs do this multiple times,
@@ -90,7 +92,7 @@ function __prompt_command () {
 
     local gitline=''
     if type -t __git_ps1 > /dev/null; then
-        gitline="\$(__git_ps1 \" ${r}${f}[$s%s${r}${f}]\")"
+        gitline="\$(__git_ps1 \" ${r}${f}[${s}%.50s${r}${f}]\")"
     fi
 
     local k8sline=''
@@ -99,8 +101,18 @@ function __prompt_command () {
         k8sline=" ${r}${f}⎈ [${s}${k8s}${r}${f}]"
     fi
 
-    export PS1="${r}${f}╭─(\t) \u@\h ${r}${p}\w${r}${gitline}${k8sline}${r}\n${f}╰─${status}${r}${s}\$${venv}${awsenv}${r}${s}>${r} "
-    export PS2="${r}  ${status}${s}\$${venv}${awsenv}>${r} "
+    if [[ -z "$COLUMNS" || "$COLUMNS" -ge 110 ]]; then
+        export PS1="${r}${f}╭─(\t) \u@\h ${r}${p}\w${r}${gitline}${k8sline}${r}\n${f}╰─${status}${r}${s}\$${venv}${awsenv}${r}${s}>${r} "
+        export PS2="${r}  ${status}${s}\$${venv}${awsenv}>${r} "
+    else
+        # special case, terminal is less than 100 columns wide:
+        export PS1="${r}${f}╭─(\t) \u@\h ${r}${p}\w${r}${f}\n├${gitline}${r}${f}\n├${k8sline}${r}${f}\n╰─${status}${r}${s}\$${venv}${awsenv}${r}${s}>${r} "
+        export PS2="${r}  ${status}${s}\$${venv}${awsenv}>${r} "
+    fi
 }
 
-export PROMPT_COMMAND=__prompt_command  # Func to gen PS1 after CMDs
+if ! [[ "${PROMPT_COMMAND:-}" =~ __prompt_command ]]; then
+  PROMPT_COMMAND="__prompt_command${PROMPT_COMMAND:+;$PROMPT_COMMAND}"
+fi
+
+fi
