@@ -5,7 +5,7 @@ if command -v pgcli >/dev/null; then
     alias pg=pgcli
 fi
 if command -v bat >/dev/null; then
-    alias cat="bat --style=plain --paging=never"
+    alias cat="bat"
 fi
 
 alias v=vim
