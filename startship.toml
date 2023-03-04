@@ -82,6 +82,14 @@ format = '[ $symbol]($style)'
 style = "bg:#86BBD8 fg:#000000"
 format = '[ $symbol($version )]($style)'
 
+[ruby]
+style = "bg:#86BBD8 fg:#000000"
+format = '[ $symbol($version )]($style)'
+
+[python]
+style = "bg:#86BBD8 fg:#000000"
+format = '[ $symbol($version )]($style)'
+
 [elm]
 symbol = " "
 style = "bg:#86BBD8 fg:#000000"

@@ -4,10 +4,12 @@ Plug 'sheerun/vim-polyglot' " syntax highligthing
 Plug 'itchyny/lightline.vim' " powerline
 Plug 'tpope/vim-fugitive' " git integration
 Plug 'ctrlpvim/ctrlp.vim' " fuzzy file finder
-" colorschemes
+Plug 'christoomey/vim-tmux-navigator' " navigate vim splits/tmux panes seamlessly
+Plug 'nvim-tree/nvim-tree.lua'
+" colorscheme, themes etc
+Plug 'nvim-tree/nvim-web-devicons'
 Plug 'flrnprz/plastic.vim'
 Plug 'sainnhe/edge'
-Plug 'christoomey/vim-tmux-navigator'
 Plug 'ayu-theme/ayu-vim'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 " Plug 'Yggdroot/indentLine'
@@ -18,7 +20,6 @@ call plug#end()
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
-
 
 set mouse=a
 set noshowmode
@@ -82,3 +83,35 @@ let g:lightline = {
 	\ 	'gitbranch': 'FugitiveHead'
 	\ },
 	\ }
+
+noremap <silent> <C-Left> :<C-U>TmuxNavigateLeft<cr>
+noremap <silent> <C-Down> :<C-U>TmuxNavigateDown<cr>
+noremap <silent> <C-Up> :<C-U>TmuxNavigateUp<cr>
+noremap <silent> <C-Down> :<C-U>TmuxNavigateRight<cr>
+
+lua <<EOF
+-- disable netrw at the very start of your init.lua (strongly advised)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- set termguicolors to enable highlight groups
+vim.opt.termguicolors = true
+
+require("nvim-tree").setup()
+
+local function open_nvim_tree(data)
+    require("nvim-tree.api").tree.toggle({focus = false, find_file = true, update_root = true})
+end
+
+vim.api.nvim_create_autocmd("BufEnter", {
+  nested = true,
+  callback = function()
+    if #vim.api.nvim_list_wins() == 1 and require("nvim-tree.utils").is_nvim_tree_buf() then
+      vim.cmd "quit"
+    end
+  end
+})
+
+vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
+EOF
+
