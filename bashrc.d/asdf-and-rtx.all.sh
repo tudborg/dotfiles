@@ -9,6 +9,8 @@ if command -v rtx >/dev/null; then
    # this is necesary to enable later calls that check for globally available
    # tools like erlang, python etc.
    eval "$(rtx hook-env -s bash)"
+
+   alias asdf='(echo use rtx instead >&2; exit 1;); #'
 elif [[ -d $HOME/.asdf ]]; then
   . $HOME/.asdf/asdf.sh
   . $HOME/.asdf/completions/asdf.bash
