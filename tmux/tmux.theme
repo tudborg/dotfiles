@@ -7,16 +7,16 @@ set -g status-style fg=colour240,bg=colour233
 # Left side of status bar
 set -g status-left-style bg=colour233,fg=colour243
 set -g status-left-length 70
-set -g status-left "#[fg=colour232,bg=colour42,bold] #[fg=colour42,bg=colour240,nobold]#[fg=colour233,bg=colour240] #(whoami)@#H #($TMUX_DIR/status-kubectl.bash) #[fg=colour240,bg=colour235]#[fg=colour240,bg=colour235] #I:#P #[fg=colour235,bg=colour233,nobold]"
+set -g status-left "[#I:#P] #(whoami)@#H #($TMUX_DIR/status-kubectl.bash) "
 
 # Right side of status bar
 set -g status-right-style bg=colour233,fg=colour243
 set -g status-right-length 70
-set -g status-right "#[fg=colour235,bg=colour233]#[fg=colour240,bg=colour235] %H:%M:%S #[fg=colour240,bg=colour235]#[fg=colour233,bg=colour240] %Y-%m-%d #[fg=colour42,bg=colour240]#[fg=colour232,bg=colour42,bold] "
+set -g status-right " %Y-%m-%dT%H:%M:%S "
 
 # Window status
 set -g window-status-format "  #I:#W#F  "
-set -g window-status-current-format "#[fg=colour233,bg=black]#[fg=colour42,nobold] #I:#W#F #[fg=colour233,bg=black,nobold]"
+set -g window-status-current-format "#[fg=colour42,bg=colour233] #I:#W#F "
 
 # Current window status
 set -g window-status-current-style bg=colour42,fg=colour235
