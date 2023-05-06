@@ -29,13 +29,13 @@ $time\
 add_newline = true
 
 [status]
-format = '[$symbol$status]($style)'
+format = '[\($symbol$status\)]($style)'
 symbol = ''
 disabled = false
 
 [character]
-success_symbol = '[❯](bold green)'
-error_symbol = '[❯](bold red)'
+success_symbol = '[\$>](bold green)'
+error_symbol = '[\$>](bold red)'
 
 
 # You can also replace your username with a neat symbol like   or disable this
