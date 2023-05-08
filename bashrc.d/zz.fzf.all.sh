@@ -11,8 +11,25 @@ if command -v fzf > /dev/null; then
     fi
   fi
 
-  # If we have bat installed, use bat as default preview fzf
-  if command -v bat >/dev/null; then
-    export FZF_DEFAULT_OPTS="--preview='bat --style=changes,numbers -r 0:\$FZF_PREVIEW_LINES -f {+}'"
+  ## If we have bat installed, use bat as default preview fzf
+  # if command -v bat >/dev/null; then
+  #   export FZF_DEFAULT_OPTS="--preview='bat --style=changes,numbers -r 0:\$FZF_PREVIEW_LINES -f {+}'"
+  # fi
+
+  export FZF_CTRL_T_OPTS="
+    --preview 'bat -n --color=always {}'
+    --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+
+  export FZF_CTRL_R_OPTS="
+    --preview 'echo {}' --preview-window up:3:hidden:wrap
+    --bind 'ctrl-/:toggle-preview'
+    --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+    --color header:italic
+    --header 'Press CTRL-Y to copy command into clipboard'"
+
+  if command -v exa > /dev/null; then
+    export FZF_ALT_C_OPTS="--preview 'exa --tree -- {}'"
+  elif command -v tree > /dev/null; then
+    export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
   fi
 fi
