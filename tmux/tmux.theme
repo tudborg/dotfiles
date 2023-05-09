@@ -9,12 +9,10 @@ set -g status-left-style bg=colour233,fg=colour243
 set -g status-left-length 70
 set -g status-left "[#I:#P] #(whoami)@#H #($TMUX_DIR/status-kubectl.bash) "
 
-set -g @cpu_percentage_format "%3.0f%%"
-
 # Right side of status bar
 set -g status-right-style bg=colour233,fg=colour243
 set -g status-right-length 70
-set -g status-right "💻 #{cpu_fg_color}#{cpu_percentage} #[bg=colour233,fg=colour243] %Y-%m-%dT%H:%M:%S "
+set -g status-right "#[bg=colour233,fg=colour243] %Y-%m-%dT%H:%M:%S "
 
 # Window status
 set -g window-status-format "  #I:#W#F  "
