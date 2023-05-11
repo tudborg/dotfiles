@@ -1,7 +1,7 @@
 [character]
-success_symbol = "[>](bold green)"
-error_symbol = "[x](bold red)"
-vimcmd_symbol = "[<](bold green)"
+success_symbol = "[\\$>](bold green)"
+error_symbol = "[\\$>](bold red)"
+vimcmd_symbol = "[<\\$](bold green)"
 
 [git_commit]
 tag_symbol = " tag "
@@ -56,7 +56,10 @@ read_only = " ro"
 symbol = "docker "
 
 [elixir]
-symbol = "exs "
+symbol = "ex "
+
+[erlang]
+symbol = "erl "
 
 [elm]
 symbol = "elm "
@@ -198,7 +201,8 @@ symbol = "scala "
 symbol = "spack "
 
 [status]
-symbol = "[x](bold red) "
+format = '[\($status\) ]($style)'
+disabled = false
 
 [sudo]
 symbol = "sudo "
