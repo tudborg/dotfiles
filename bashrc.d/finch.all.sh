@@ -3,4 +3,7 @@ if command -v finch >/dev/null && [[ -d $BREW_PREFIX/etc/bash_completion.d ]]; t
         echo "Writing finch bash completions" >&2
         finch completion bash > $BREW_PREFIX/etc/bash_completion.d/finch
     fi
+    if ! command -v docker >/dev/null; then
+        alias docker="finch"
+    fi
 fi
