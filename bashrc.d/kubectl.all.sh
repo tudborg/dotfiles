@@ -12,7 +12,7 @@ if command -v kubectl >/dev/null; then
         kubectl completion bash > $HOME/.kube/completion.bash.inc
     fi
     # if the kubectl completion is not loaded, load it:
-    if ! command -v __start_kubectl >/dev/null; then
+    if [[ -d $HOME/.kube ]] && ! command -v __start_kubectl >/dev/null; then
         source $HOME/.kube/completion.bash.inc
     fi
     # make kubectl completions work for our short-name function `k` as well
