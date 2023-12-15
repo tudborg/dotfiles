@@ -6,13 +6,18 @@ if command -v kubectl >/dev/null; then
         path_append "${HOME}/.krew/bin"
     fi
 
+    # create $HOME/.kube if it doesn't exist.
+    if ! [[ -d $HOME/.kube ]]; then
+        mkdir $HOME/.kube
+    fi
+
     # cache kubectl completions so we don't have to invoke kubectl
     # each time we want to source the completions.
-    if [[ -d $HOME/.kube ]] && [[ ! -f $HOME/.kube/completion.bash.inc ]]; then
+    if [[ ! -f $HOME/.kube/completion.bash.inc ]]; then
         kubectl completion bash > $HOME/.kube/completion.bash.inc
     fi
     # if the kubectl completion is not loaded, load it:
-    if [[ -d $HOME/.kube ]] && ! command -v __start_kubectl >/dev/null; then
+    if ! command -v __start_kubectl >/dev/null; then
         source $HOME/.kube/completion.bash.inc
     fi
     # make kubectl completions work for our short-name function `k` as well
