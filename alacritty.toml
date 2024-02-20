@@ -1,0 +1,205 @@
+[cursor]
+unfocused_hollow = true
+
+[cursor.style]
+blinking = "On"
+
+[font]
+size = 16
+
+[font.bold]
+style = "SemiBold"
+
+[font.bold_italic]
+style = "SemiBold Italic"
+
+[font.italic]
+style = "Italic"
+
+[font.normal]
+family = "FiraCode Nerd Font Mono"
+style = "Light"
+
+[[keyboard.bindings]]
+key = "Comma"
+mods = "Command"
+
+[keyboard.bindings.command]
+args = ["-c", "open ~/.config/alacritty/alacritty.toml"]
+program = "sh"
+
+[[keyboard.bindings]]
+chars = " "
+key = "Space"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u0015"
+key = "Back"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u001Bb"
+key = "Left"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001Bf"
+key = "Right"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001BOH"
+key = "Left"
+mode = "AppCursor"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u001BOF"
+key = "Right"
+mode = "AppCursor"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = ""
+key = 10
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "¡"
+key = 18
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "“"
+key = 19
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "§"
+key = 20
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "£"
+key = 21
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "∞"
+key = 23
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "™"
+key = 22
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "¶"
+key = 26
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "["
+key = 28
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "]"
+key = 25
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "'"
+key = 24
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "@"
+key = 42
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "|"
+key = 34
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "'"
+key = 10
+mods = "Alt|Shift"
+
+[[keyboard.bindings]]
+chars = "¯"
+key = 18
+mods = "Alt|Shift"
+
+[[keyboard.bindings]]
+chars = "”"
+key = 19
+mods = "Alt|Shift"
+
+[[keyboard.bindings]]
+chars = "$"
+key = 20
+mods = "Alt|Shift"
+
+[[keyboard.bindings]]
+chars = "¢"
+key = 21
+mods = "Alt|Shift"
+
+[[keyboard.bindings]]
+chars = "‰"
+key = 23
+mods = "Alt|Shift"
+
+[[keyboard.bindings]]
+chars = ""
+key = 22
+mods = "Alt|Shift"
+
+[[keyboard.bindings]]
+chars = '\'
+key = 26
+mods = "Alt|Shift"
+
+[[keyboard.bindings]]
+chars = "{"
+key = 28
+mods = "Alt|Shift"
+
+[[keyboard.bindings]]
+chars = "}"
+key = 25
+mods = "Alt|Shift"
+
+[[keyboard.bindings]]
+chars = "^"
+key = 30
+mods = "Alt|Shift"
+
+[[keyboard.bindings]]
+chars = "º"
+key = 49
+mods = "Alt|Shift"
+
+[[keyboard.bindings]]
+chars = "\U0000001Bc"
+key = "c"
+mods = "Alt"
+
+[shell]
+args = ["new", "-s primary", "-A", "-D", "-X"]
+program = "/opt/homebrew/bin/tmux"
+
+[window]
+decorations = "Full"
+option_as_alt = "OnlyRight"
+startup_mode = "Maximized"
+dynamic_title = true
+
+[window.padding]
+x = 0
+y = 0

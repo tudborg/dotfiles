@@ -27,8 +27,8 @@ if command -v fzf > /dev/null; then
     --color header:italic
     --header 'Press CTRL-Y to copy command into clipboard'"
 
-  if command -v exa > /dev/null; then
-    export FZF_ALT_C_OPTS="--preview 'exa --tree -- {}'"
+  if command -v eza > /dev/null; then
+    export FZF_ALT_C_OPTS="--preview 'eza --tree -- {}'"
   elif command -v tree > /dev/null; then
     export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
   fi
