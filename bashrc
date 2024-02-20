@@ -64,4 +64,5 @@ export DOTFILES_DIRECTORY="$(dotfiles_directory)"
 if [ "$DOTFILES_DEBUG" = true ]; then
     echo "sourcing dotfiles:" >&2
 fi
+
 dotfiles_source
