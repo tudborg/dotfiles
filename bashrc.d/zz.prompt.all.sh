@@ -65,8 +65,8 @@ function __prompt_command () {
 
 
     local r="$RESET"       # reset sequence
-    local p="$BOLD$CYAN"  # primary color sequence
-    local s="$DIM$CYAN"   # secondary color sequence
+    local p="$MAGENTA"  # primary color sequence
+    local s="$GREY"   # secondary color sequence
     local f="$GREY"        # framing color (usually grey)
     local e="$RED"         # error sequence
 
@@ -74,20 +74,15 @@ function __prompt_command () {
     if [ $LASTEXIT != 0 ]; then
         local status="$r$f($r$e${LASTEXIT}$r$f)$r "
     else
-        local status="$r$f(0)$r "
+        local status=""
     fi
 
-    # virtualenv support
-    if [[ "$VIRTUAL_ENV" != "" ]]; then
-        local venv="$r$f(venv:$s${VIRTUAL_ENV##*/}$r$f)$r"
-    else
-        local venv=""
-    fi
-
-    if [[ "$AWS_PROFILE" != "" ]]; then
-        local awsenv="$r$f(aws:$s${AWS_PROFILE}$r$f)$r"
-    else
-        local awsenv=""
+    local versionline=''
+    local mise_exclude="usage"
+    local versions
+    versions="$(mise current | grep -vE "$mise_exclude")"
+    if [[ $? -eq 0 ]]; then
+        versionline="${r}${s}[versions: ${versions//$'\n'/, }]"
     fi
 
     local gitline=''
@@ -95,19 +90,13 @@ function __prompt_command () {
         gitline="\$(__git_ps1 \" ${r}${f}[${s}%.50s${r}${f}]\")"
     fi
 
-    local k8sline=''
-    if type -t kubectl > /dev/null; then
-        local k8s="$(kubectl config view --minify -o jsonpath='{.current-context} {..namespace}')"
-        k8sline=" ${r}${f}⎈ [${s}${k8s}${r}${f}]"
-    fi
-
     if [[ -z "$COLUMNS" || "$COLUMNS" -ge 110 ]]; then
-        export PS1="${r}${f}╭─(\t) \u@\h ${r}${p}\w${r}${gitline}${k8sline}${r}\n${f}╰─${status}${r}${s}\$${venv}${awsenv}${r}${s}>${r} "
-        export PS2="${r}  ${status}${s}\$${venv}${awsenv}>${r} "
+        export PS1="${r}${p}\w${r}${gitline}${versionline}\n${f}${status}${r}${s}\$${r}${s}>${r} "
+        export PS2="${r}  ${status}${s}\$>${r} "
     else
         # special case, terminal is less than 100 columns wide:
-        export PS1="${r}${f}╭─(\t) \u@\h ${r}${p}\w${r}${f}\n├${gitline}${r}${f}\n├${k8sline}${r}${f}\n╰─${status}${r}${s}\$${venv}${awsenv}${r}${s}>${r} "
-        export PS2="${r}  ${status}${s}\$${venv}${awsenv}>${r} "
+        export PS1="${r}${f}╭─ ${r}${p}\w${r}${f}\n├ ${gitline}${r}${f}\n╰─${status}${r}${s}\$${r}${s}>${r} "
+        export PS2="${r}  ${status}${s}\$>${r} "
     fi
 }
 

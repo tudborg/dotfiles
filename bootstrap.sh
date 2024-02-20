@@ -7,20 +7,22 @@ set -euo pipefail
 BREW_PACKAGES=()
 # absolute barebones packages:
 BREW_PACKAGES+=(bash git tmux)
+BREW_PACKAGES+=(bash-completion)
 # must-haves:
 BREW_PACKAGES+=(htop)
 # nice-to-haves:
-BREW_PACKAGES+=(fzf exa bat)
+BREW_PACKAGES+=(fzf)
 # prompt:
-BREW_PACKAGES+=(starship)
+# BREW_PACKAGES+=(starship)
 
 # utilities:
-BREW_PACKAGES+=(bash-completion)
 BREW_PACKAGES+=(sccache)
-BREW_PACKAGES+=("ripgrep")
+BREW_PACKAGES+=(ripgrep)
+BREW_PACKAGES+=(eza) # ls replacement
+BREW_PACKAGES+=(bat) # cat replacement
 
-# need rtx later down in the bootstrap script, install via brew:
-BREW_PACKAGES+=(jdxcode/tap/rtx)
+# Mise, dev tool management (version manager)
+BREW_PACKAGES+=(mise)
 
 ##
 ## Bootstrap!

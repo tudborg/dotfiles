@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 main () {
-  local KUBECTL=$HOME/bin/kubectl
+  local KUBECTL=/opt/homebrew/bin/kubectl
   if command -v "$KUBECTL" > /dev/null; then
     local current="$($KUBECTL config view --minify -o jsonpath='{.current-context} ns={..namespace}')"
     local style="fg=colour42,nobold"

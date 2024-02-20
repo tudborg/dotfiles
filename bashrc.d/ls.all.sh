@@ -4,7 +4,10 @@ if command -v ls >/dev/null; then
         test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
         alias ls='ls --color=auto'
     fi
-    alias ll='ls -alFG'
-    alias la='ls -AG'
-    alias l='ls -CFG'
+
+    if command -v eza >/dev/null; then
+        alias l='eza'
+    else
+        alias l='ls -alFG'
+    fi
 fi
