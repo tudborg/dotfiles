@@ -85,17 +85,22 @@ function __prompt_command () {
         versionline="${r}${s}[versions: ${versions//$'\n'/, }]"
     fi
 
+    local prompt_prefix=''
+    if [[ -n "$VIRTUAL_ENV_PROMPT" ]]; then
+        prompt_prefix="${VIRTUAL_ENV_PROMPT}"
+    fi
+
     local gitline=''
     if type -t __git_ps1 > /dev/null; then
         gitline="\$(__git_ps1 \" ${r}${f}[${s}%.50s${r}${f}]\")"
     fi
 
     if [[ -z "$COLUMNS" || "$COLUMNS" -ge 110 ]]; then
-        export PS1="${r}${p}\w${r}${gitline}${versionline}\n${f}${status}${r}${s}\$${r}${s}>${r} "
+        export PS1="${r}${p}\w${r}${gitline}${versionline}\n${f}${status}${r}${s}\$${r}${s}${prompt_prefix}>${r} "
         export PS2="${r}  ${status}${s}\$>${r} "
     else
         # special case, terminal is less than 100 columns wide:
-        export PS1="${r}${f}╭─ ${r}${p}\w${r}${f}\n├ ${gitline}${r}${f}\n╰─${status}${r}${s}\$${r}${s}>${r} "
+        export PS1="${r}${f}╭─ ${r}${p}\w${r}${f}\n├ ${gitline}${r}${f}\n╰─${status}${r}${s}\$${r}${s}${prompt_prefix}>${r} "
         export PS2="${r}  ${status}${s}\$>${r} "
     fi
 }
