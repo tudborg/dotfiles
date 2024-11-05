@@ -1,0 +1,34 @@
+# intended to be included from a global gitconfig file
+# outside of this repo.
+# the global gitconfig should define a default identity
+# (maybe only a name) and have includeIf directives
+# to manage identities.
+# e.g.
+# [user]
+# 	name = <my name>
+# [includeIf "gitdir:~/src/<org>"]
+# 	path = ~/.config/git/identities/<org>
+# [includeIf "gitdir:~/src/<org>"]
+# 	path = ~/.config/git/identities/<org>
+
+[color]
+	diff = auto
+	status = auto
+	ui = true
+[alias]
+	st = status
+	br = branch
+	df = diff
+	lg = log -p
+	pl = pull --all -p
+	ps = push
+	ci = commit --verbose
+	co = checkout
+[rerere]
+	enabled = true
+[merge]
+    ff = false
+[pull]
+    ff = only
+[init]
+    defaultBranch = main
