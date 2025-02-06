@@ -24,11 +24,14 @@
 	ps = push
 	ci = commit --verbose
 	co = checkout
+	wat = !git reflog show --pretty=format:'%gs ~ %gd' --date=relative | perl -n -e '/^checkout: moving from (.+) to (.+) ~ [^{]+{([^}]+)}$/ && print \"$3 $1\n\"' | head
 [rerere]
 	enabled = true
 [merge]
     ff = false
 [pull]
     ff = only
+[push]
+	followTags = true
 [init]
     defaultBranch = main
