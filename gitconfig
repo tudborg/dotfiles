@@ -32,6 +32,8 @@
 [pull]
     ff = only
 [push]
-	followTags = true
+	# followTags = true
 [init]
     defaultBranch = main
+[commit]
+	template= ~/.gitmessage

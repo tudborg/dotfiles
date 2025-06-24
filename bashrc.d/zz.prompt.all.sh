@@ -77,13 +77,6 @@ function __prompt_command () {
         local status=""
     fi
 
-    local versionline=''
-    local mise_exclude="usage"
-    local versions
-    versions="$(mise current | grep -vE "$mise_exclude")"
-    if [[ $? -eq 0 ]]; then
-        versionline="${r}${s}[versions: ${versions//$'\n'/, }]"
-    fi
 
     local prompt_prefix=''
     if [[ -n "$VIRTUAL_ENV_PROMPT" ]]; then
@@ -96,7 +89,7 @@ function __prompt_command () {
     fi
 
     if [[ -z "$COLUMNS" || "$COLUMNS" -ge 110 ]]; then
-        export PS1="${r}${p}\w${r}${gitline}${versionline}\n${f}${status}${r}${s}\$${r}${s}${prompt_prefix}>${r} "
+        export PS1="${r}${p}\w${r}${gitline}\n${f}${status}${r}${s}\$${r}${s}${prompt_prefix}>${r} "
         export PS2="${r}  ${status}${s}\$>${r} "
     else
         # special case, terminal is less than 100 columns wide:
